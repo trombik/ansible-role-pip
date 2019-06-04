@@ -2,7 +2,7 @@
 galaxy_info:
   role_name: pip
   author: Tomoyuki Sakurai
-  description: Configures something
+  description: Install python pip(s)
   company: N/A
   license: BSD
   min_ansible_version: 2.0
