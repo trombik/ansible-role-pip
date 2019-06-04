@@ -1,6 +1,6 @@
-# ansible-role-pip
+# `trombik.pip`
 
-A brief description of the role goes here.
+Install pip package(s).
 
 # Requirements
 
@@ -8,8 +8,17 @@ None
 
 # Role Variables
 
-| variable | description | default |
+| Variable | Description | Default |
 |----------|-------------|---------|
+| `pip_packages` | | `{{ __pip_packages }}` |
+| `pip_extra_packages` | | `[]` |
+
+
+## FreeBSD
+
+| Variable | Default |
+|----------|---------|
+| `__pip_packages` | `["py36-pip"]` |
 
 
 # Dependencies
@@ -19,6 +28,24 @@ None
 # Example Playbook
 
 ```yaml
+---
+- hosts: localhost
+  roles:
+    - ansible-role-pip
+  post_tasks:
+    - name: Install platformio
+      pip:
+        name: platformio
+        executable: pip-2.7
+        extra_args: --user
+      become: yes
+      become_user: vagrant
+      # pip needs `-H` when sudo is used
+      become_flags: -H
+  vars:
+    pip_packages:
+      - py27-pip
+      - py36-pip
 ```
 
 # License
