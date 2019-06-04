@@ -2,5 +2,17 @@
 - hosts: localhost
   roles:
     - ansible-role-pip
+  post_tasks:
+    - name: Install platformio
+      pip:
+        name: platformio
+        executable: pip-2.7
+        extra_args: --user
+      become: yes
+      become_user: vagrant
+      # pip needs `-H` when sudo is used
+      become_flags: -H
   vars:
-    pip_config: ""
+    pip_packages:
+      - py27-pip
+      - py36-pip

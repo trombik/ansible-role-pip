@@ -1,9 +1,3 @@
 ---
-pip_user: pip
-pip_group: pip
-pip_log_dir: /var/log/pip
-pip_db_dir: "{{ __pip_db_dir }}"
-pip_service: pip
-pip_conf_dir: "{{ __pip_conf_dir }}"
-pip_conf_file: "{{ __pip_conf_dir }}/pip.conf"
-pip_flags: ""
+pip_packages: "{{ __pip_packages }}"
+pip_extra_packages: []
