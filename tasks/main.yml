@@ -1,0 +1,37 @@
+---
+# tasks file for ansible-role-pip
+
+- include_vars: "{{ ansible_os_family }}.yml"
+
+- include: "install-{{ ansible_os_family }}.yml"
+
+- name: Create log directory
+  file:
+    path: "{{ pip_log_dir }}"
+    mode: 0755
+    owner: "{{ pip_user }}"
+    group: "{{ pip_group }}"
+    state: directory
+  notify: Restart pip
+
+- name: Create db directory
+  file:
+    path: "{{ pip_db_dir }}"
+    mode: 0755
+    owner: "{{ pip_user }}"
+    group: "{{ pip_group }}"
+    state: directory
+  notify: Restart pip
+
+- name: Create pip.conf
+  template:
+    src: pip.conf.j2
+    dest: "{{ pip_conf_file }}"
+    validate: echo %s
+  notify: Restart pip
+
+- name: Start pip
+  service:
+    name: "{{ pip_service }}"
+    enabled: true
+    state: started

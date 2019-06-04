@@ -1,0 +1,6 @@
+---
+
+- name: Install pip
+  pkgng:
+    name: pip
+    state: present
