@@ -10,8 +10,8 @@ None
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `pip_packages` | | `{{ __pip_packages }}` |
-| `pip_extra_packages` | | `[]` |
+| `pip_packages` | list of pip package names to install | `{{ __pip_packages }}` |
+| `pip_extra_packages` | list of extra packages to install | `[]` |
 
 
 ## FreeBSD
