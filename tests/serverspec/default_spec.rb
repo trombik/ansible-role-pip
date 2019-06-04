@@ -2,13 +2,13 @@ require "spec_helper"
 require "serverspec"
 
 packages = case os[:family]
-          when "freebsd"
-            ["py27-pip", "py36-pip"]
-          end
+           when "freebsd"
+             ["py27-pip", "py36-pip"]
+           end
 pip_executables = case os[:family]
-                 when "freebsd"
-                   ["/usr/local/bin/pip-2.7", "/usr/local/bin/pip-3.6"]
-                 end
+                  when "freebsd"
+                    ["/usr/local/bin/pip-2.7", "/usr/local/bin/pip-3.6"]
+                  end
 pip_packages = ["platformio"]
 
 packages.each do |p|
