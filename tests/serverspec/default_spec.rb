@@ -3,11 +3,11 @@ require "serverspec"
 
 packages = case os[:family]
            when "freebsd"
-             ["py27-pip", "py36-pip"]
+             ["py27-pip", "py37-pip"]
            end
 pip_executables = case os[:family]
                   when "freebsd"
-                    ["/usr/local/bin/pip-2.7", "/usr/local/bin/pip-3.6"]
+                    ["/usr/local/bin/pip-2.7", "/usr/local/bin/pip-3.7"]
                   end
 pip_packages = ["platformio"]
 

@@ -36,7 +36,7 @@ None
     - name: Install platformio
       pip:
         name: platformio
-        executable: pip-2.7
+        executable: pip-3.7
         extra_args: --user
       become: yes
       become_user: vagrant
@@ -45,7 +45,7 @@ None
   vars:
     pip_packages:
       - py27-pip
-      - py36-pip
+      - py37-pip
 ```
 
 # License
