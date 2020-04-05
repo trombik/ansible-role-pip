@@ -6,13 +6,20 @@
     - name: Install platformio
       pip:
         name: platformio
-        executable: pip-3.7
+        executable: "{% if ansible_os_family == 'FreeBSD' %}pip-3.7{% elif ansible_os_family == 'Debian' %}pip2{% endif %}"
         extra_args: --user
       become: yes
       become_user: vagrant
       # pip needs `-H` when sudo is used
       become_flags: -H
+      # XXX pip2 always makes result `changed`
+      changed_when: false
   vars:
-    pip_packages:
-      - py27-pip
-      - py37-pip
+    os_pip_packages:
+      FreeBSD:
+        - py27-pip
+        - py37-pip
+      Debian:
+        - python-pip
+        - python3-pip
+    pip_packages: "{{ os_pip_packages[ansible_os_family] }}"
