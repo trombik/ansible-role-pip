@@ -4,10 +4,14 @@ require "serverspec"
 packages = case os[:family]
            when "freebsd"
              ["py27-pip", "py37-pip"]
+           when "ubuntu"
+             ["python-pip", "python3-pip"]
            end
 pip_executables = case os[:family]
                   when "freebsd"
                     ["/usr/local/bin/pip-2.7", "/usr/local/bin/pip-3.7"]
+                  when "ubuntu"
+                    ["/usr/bin/pip2", "/usr/bin/pip3"]
                   end
 pip_packages = ["platformio"]
 
@@ -34,7 +38,10 @@ end
 
 pip_packages.each do |p|
   describe package(p) do
-    it { should_not be_installed.by("pip") }
+    it do
+      pending "hard-coded pip command in specinfra" if os[:family] == "ubuntu"
+      should_not be_installed.by("pip")
+    end
   end
 end
 
