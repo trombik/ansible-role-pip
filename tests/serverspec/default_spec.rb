@@ -9,11 +9,11 @@ packages = case os[:family]
              ["python3-pip"]
            end
 pip_executable = case os[:family]
-                  when "freebsd"
-                    "/usr/local/bin/pip-3.7"
-                  when "ubuntu"
-                    "/usr/bin/pip3"
-                  end
+                 when "freebsd"
+                   "/usr/local/bin/pip-3.7"
+                 when "ubuntu"
+                   "/usr/bin/pip3"
+                 end
 pip_packages = ["platformio"]
 
 packages.each do |p|
