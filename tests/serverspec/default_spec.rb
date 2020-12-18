@@ -1,17 +1,18 @@
 require "spec_helper"
 require "serverspec"
+require "pathname"
 
 packages = case os[:family]
            when "freebsd"
-             ["py27-pip", "py37-pip"]
+             ["py37-pip"]
            when "ubuntu"
-             ["python-pip", "python3-pip"]
+             ["python3-pip"]
            end
-pip_executables = case os[:family]
+pip_executable = case os[:family]
                   when "freebsd"
-                    ["/usr/local/bin/pip-2.7", "/usr/local/bin/pip-3.7"]
+                    "/usr/local/bin/pip-3.7"
                   when "ubuntu"
-                    ["/usr/bin/pip2", "/usr/bin/pip3"]
+                    "/usr/bin/pip3"
                   end
 pip_packages = ["platformio"]
 
@@ -21,27 +22,22 @@ packages.each do |p|
   end
 end
 
-pip_executables.each do |e|
-  describe command("#{e} --version") do
-    its(:exit_status) { should eq 0 }
-    its(:stderr) { should eq "" }
-    its(:stdout) { should match(/^pip\s+\d+\.\d+\.\d+\s/) }
-  end
+describe command("#{pip_executable} --version") do
+  its(:exit_status) { should eq 0 }
+  its(:stderr) { should eq "" }
+  its(:stdout) { should match(/^pip\s+\d+\.\d+\.\d+\s/) }
 end
 
 pip_packages.each do |p|
   describe package(p) do
     let(:disable_sudo) { true }
-    it { should be_installed.by("pip") }
+    it { should be_installed.by(os[:family] == "ubuntu" ? "pip3" : "pip") }
   end
 end
 
 pip_packages.each do |p|
   describe package(p) do
-    it do
-      pending "hard-coded pip command in specinfra" if os[:family] == "ubuntu"
-      should_not be_installed.by("pip")
-    end
+    it { should_not be_installed.by(os[:family] == "ubuntu" ? "pip3" : "pip") }
   end
 end
 
