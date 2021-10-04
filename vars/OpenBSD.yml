@@ -1,0 +1,4 @@
+---
+__pip_packages:
+  - py3-pip
+__pip_executable_file: /usr/local/bin/pip3.8

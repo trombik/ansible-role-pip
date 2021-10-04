@@ -1,6 +1,6 @@
 # `trombik.pip`
 
-Install pip package(s).
+Install pip package(s), and create a symlink, `pip3`.
 
 # Requirements
 
@@ -12,14 +12,28 @@ None
 |----------|-------------|---------|
 | `pip_packages` | list of pip package names to install | `{{ __pip_packages }}` |
 | `pip_extra_packages` | list of extra packages to install | `[]` |
+| `pip_executable_file` | real path to `pip`  executable | `{{ __pip_executable_file }}` |
 
+## Debian
+
+| Variable | Default |
+|----------|---------|
+| `__pip_packages` | `["python3-pip"]` |
+| `__pip_executable_file` | `/usr/bin/pip3` |
 
 ## FreeBSD
 
 | Variable | Default |
 |----------|---------|
-| `__pip_packages` | `["py36-pip"]` |
+| `__pip_packages` | `["py38-pip"]` |
+| `__pip_executable_file` | `/usr/local/bin/pip-3.8` |
 
+## OpenBSD
+
+| Variable | Default |
+|----------|---------|
+| `__pip_packages` | `["py3-pip"]` |
+| `__pip_executable_file` | `/usr/local/bin/pip3.8` |
 
 # Dependencies
 
@@ -34,18 +48,14 @@ None
     - ansible-role-pip
   post_tasks:
     - name: Install platformio
-      pip:
+      ansible.builtin.pip:
         name: platformio
-        executable: pip-3.7
         extra_args: --user
       become: yes
       become_user: vagrant
       # pip needs `-H` when sudo is used
       become_flags: -H
   vars:
-    pip_packages:
-      - py27-pip
-      - py37-pip
 ```
 
 # License

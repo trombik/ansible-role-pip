@@ -4,15 +4,11 @@
     - ansible-role-pip
   post_tasks:
     - name: Install platformio
-      pip:
+      ansible.builtin.pip:
         name: platformio
-        executable: "{{ os_pip_executable[ansible_os_family] }}"
         extra_args: --user
       become: yes
       become_user: vagrant
       # pip needs `-H` when sudo is used
       become_flags: -H
   vars:
-    os_pip_executable:
-      FreeBSD: pip-3.7
-      Debian: pip3

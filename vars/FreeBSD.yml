@@ -1,3 +1,4 @@
 ---
 __pip_packages:
-  - py37-pip
+  - py38-pip
+__pip_executable_file: /usr/local/bin/pip-3.8
