@@ -1,6 +1,1 @@
 ---
-
-- name: Restart pip
-  service:
-    name: pip
-    state: restarted
