@@ -1,3 +1,4 @@
 ---
 pip_packages: "{{ __pip_packages }}"
 pip_extra_packages: []
+pip_executable_file: "{{ __pip_executable_file }}"

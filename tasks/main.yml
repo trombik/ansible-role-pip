@@ -6,3 +6,17 @@
 
 - name: Include OS-specific install tasks
   include: "install-{{ ansible_os_family }}.yml"
+
+- name: See if pip_executable_file exists
+  ansible.builtin.stat:
+    path: "{{ pip_executable_file }}"
+  register: __stat_pip_executable_file
+
+- name: Assert pip_executable_file exists
+  # XXX if this fail, possibly pip_executable_file is wrong. i.e. version and
+  # path mismatch.
+  ansible.builtin.assert:
+    that:
+      - __stat_pip_executable_file.stat
+      - __stat_pip_executable_file.stat.exists
+      - __stat_pip_executable_file.stat.executable

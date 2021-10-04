@@ -1,3 +1,4 @@
 ---
 __pip_packages:
   - python3-pip
+__pip_executable_file: /usr/bin/pip3

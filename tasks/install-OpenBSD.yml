@@ -1,13 +1,13 @@
 ---
 
 - name: Install pip_extra_packages
-  pkgng:
+  openbsd_pkg:
     name: "{{ pip_extra_packages }}"
   when:
     - pip_extra_packages | length > 0
 
 - name: Install pip_packages
-  pkgng:
+  openbsd_pkg:
     name: "{{ pip_packages }}"
     state: present
 
@@ -19,3 +19,4 @@
     dest: "/usr/local/bin/pip{{ ansible_python['version']['major'] }}"
     src: "{{ pip_executable_file }}"
     state: link
+
