@@ -1,3 +1,10 @@
+## Release 1.0.3
+
+* 1e08710 bugfix: QA
+* 687d0e4 bugfix: update Gemfile
+* 9850e5b bugfix: support OpenBSD, ensure `pip3` exists
+* 363edad bugfix: remove unused handler
+
 ## Release 1.0.2
 
 * f3c6571 bugfix: QA
