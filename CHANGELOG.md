@@ -1,3 +1,7 @@
+## Release 1.0.4
+
+* 7583f5e bugfix: support Devuan
+
 ## Release 1.0.3
 
 * 1e08710 bugfix: QA
