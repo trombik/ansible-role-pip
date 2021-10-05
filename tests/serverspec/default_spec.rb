@@ -5,7 +5,7 @@ require "pathname"
 packages = case os[:family]
            when "freebsd"
              ["py38-pip"]
-           when "ubuntu"
+           when "ubuntu", "devuan"
              ["python3-pip"]
            when "openbsd"
              ["py3-pip"]
@@ -13,7 +13,7 @@ packages = case os[:family]
 pip_executable = case os[:family]
                  when "freebsd"
                    "/usr/local/bin/pip-3.8"
-                 when "ubuntu"
+                 when "ubuntu", "devuan"
                    "/usr/bin/pip3"
                  when "openbsd"
                    "/usr/local/bin/pip3.8"
@@ -35,7 +35,8 @@ end
 describe command("#{pip_executable} --version") do
   its(:exit_status) { should eq 0 }
   its(:stderr) { should eq "" }
-  its(:stdout) { should match(/^pip\s+\d+\.\d+\.\d+\s/) }
+  # pip 18.1 from /usr/lib/python3/dist-packages/pip (python 3.7)
+  its(:stdout) { should match(/^pip\s+\d+\.\d+(\.\d+)?\s/) }
 end
 
 describe file pip3_file do
@@ -51,7 +52,7 @@ end
 describe command("pip3 --version") do
   its(:exit_status) { should eq 0 }
   its(:stderr) { should eq "" }
-  its(:stdout) { should match(/^pip\s+\d+\.\d+\.\d+\s/) }
+  its(:stdout) { should match(/^pip\s+\d+\.\d+(\.\d+)?\s/) }
 end
 
 pip_packages.each do |p|
