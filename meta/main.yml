@@ -17,6 +17,9 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - focal
+    - name: Devuan
+      versions:
+        - beowulf
   galaxy_tags:
     - python
     - pip
